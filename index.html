@@ -96,31 +96,63 @@
 
       const button = document.querySelector("#btn");
 
-      button.addEventListener("click", (e) => {
-        e.preventDefault();
-        name.innerHTML = "<em>Loading...</em>";
-        height.innerHTML = "<em>Loading...</em>";
-        mass.innerHTML = "<em>Loading...</em>";
-        gender.innerHTML = "<em>Loading...</em>";
-        species.innerHTML = "<em>Loading...</em>";
-        const randomNum = Math.ceil(Math.random() * 83);
-        // fetch(`https://swapi.dev/api/people/${randomNum}/`)
-        fetch(
-          `https://rawcdn.githack.com/akabab/starwars-api/0.2.1/api/all.json`
-        )
+    
+
+      
+      window.onload = function () {
+        console.log("working")
+        fetch('https://rawcdn.githack.com/akabab/starwars-api/0.2.1/api/all.json')
           .then((response) => response.json())
           .then((characters) => {
-            const character = characters[randomNum];
-            pro_pic.setAttribute("src", character["image"]);
-            name.innerHTML = character["name"];
-            height.innerHTML = character["height"];
-            mass.innerHTML = character["mass"];
-            gender.innerHTML = character["gender"];
-            species.innerHTML = character["species"];
+            
+            button.addEventListener('click', (e) => {
+              e.preventDefault();
+              name.innerHTML = "<em>Loading...</em>";
+              height.innerHTML = "<em>Loading...</em>";
+              mass.innerHTML = "<em>Loading...</em>";
+              gender.innerHTML = "<em>Loading...</em>";
+              species.innerHTML = "<em>Loading...</em>";
 
-            console.log(characters[randomNum]);
-          });
-      });
+              const randomNum = Math.ceil(Math.random() * 83);
+              const character = characters[randomNum]
+              
+              pro_pic.setAttribute("src", character["image"]);
+              name.innerHTML = character["name"];
+              height.innerHTML = character["height"];
+              mass.innerHTML = character["mass"];
+              gender.innerHTML = character["gender"];
+              species.innerHTML = character["species"];
+
+              console.log(characters[randomNum]);
+            })
+          })
+      }
+
+      // button.addEventListener("click", (e) => {
+      //   e.preventDefault();
+      //   name.innerHTML = "<em>Loading...</em>";
+      //   height.innerHTML = "<em>Loading...</em>";
+      //   mass.innerHTML = "<em>Loading...</em>";
+      //   gender.innerHTML = "<em>Loading...</em>";
+      //   species.innerHTML = "<em>Loading...</em>";
+      //   const randomNum = Math.ceil(Math.random() * 83);
+      //   // fetch(`https://swapi.dev/api/people/${randomNum}/`)
+      //   fetch(
+      //     `https://rawcdn.githack.com/akabab/starwars-api/0.2.1/api/all.json`
+      //   )
+      //     .then((response) => response.json())
+      //     .then((characters) => {
+      //       const character = characters[randomNum];
+      //       pro_pic.setAttribute("src", character["image"]);
+      //       name.innerHTML = character["name"];
+      //       height.innerHTML = character["height"];
+      //       mass.innerHTML = character["mass"];
+      //       gender.innerHTML = character["gender"];
+      //       species.innerHTML = character["species"];
+
+      //       console.log(characters[randomNum]);
+      //     });
+      // });
     </script>
 
     <!-- bootstrap script -->
