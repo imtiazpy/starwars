@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Star wars</title>
+    <!-- bootstrap CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <style>
+      body {
+        background: url(./starwars-bg.jpg);
+        color: rgb(143, 32, 32);
+      }
+      img {
+          border-radius: 50%;
+      }
+      button {
+          background: rgb(143, 32, 32);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar" class="container text-center py-4 mb-5">
+      <h1>Star Wars</h1>
+    </div>
+
+    <div id="profile" class="container p-5">
+      <div class="row">
+        <div class="col-lg-6 col-12">
+          <img
+            id="pro-pic"
+            src=""
+            alt="Profile-Picture"
+            width="300px"
+            height="300px"
+          />
+        </div>
+        <div class="col-lg-6 col-12">
+          <h3>About</h3>
+          <div class="d-flex">
+            <strong><label for="name">Name:</label></strong>
+            <p id="name" class="ms-2">...</p>
+          </div>
+          <div class="d-flex">
+            <strong><label for="height">Height:</label></strong>
+            <p id="height" class="ms-2">...</p>
+          </div>
+          <div class="d-flex">
+            <strong><label for="mass">Mass:</label></strong>
+            <p id="mass" class="ms-2">...</p>
+          </div>
+          <div class="d-flex">
+            <strong><label for="gender">Gender:</label></strong>
+            <p id="gender" class="ms-2">...</p>
+          </div>
+          <div class="d-flex">
+            <strong><label for="species">Species:</label></strong>
+            <p id="species" class="ms-2">...</p>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button id="btn">Change Character</button>
+      </div>
+    </div>
+
+    <!-- <div class="center">
+        <h2>Character</h2>
+        <strong>Name:</strong>
+        <div id="name">...</div>
+        <strong>Height:</strong>
+        <div id="height">...</div>
+        <strong>Mass:</strong>
+        <div id="mass">...</div>
+        <strong>Hair Color:</strong>
+        <div id="hair-color">...</div>
+        <strong>Profile Picture</strong>
+        <div><img id="pro-pic" src="" alt="pro-pic" width="100px"></div>
+        
+        <button id="btn">Change Character</button>
+    </div> -->
+
+    <script>
+      const pro_pic = document.querySelector("#pro-pic");
+      const name = document.querySelector("#name");
+      const height = document.querySelector("#height");
+      const mass = document.querySelector("#mass");
+      const gender = document.querySelector("#gender");
+      const species = document.querySelector("#species");
+
+      const button = document.querySelector("#btn");
+
+      button.addEventListener("click", (e) => {
+        e.preventDefault();
+        name.innerHTML = "<em>Loading...</em>";
+        height.innerHTML = "<em>Loading...</em>";
+        mass.innerHTML = "<em>Loading...</em>";
+        gender.innerHTML = "<em>Loading...</em>";
+        species.innerHTML = "<em>Loading...</em>";
+        const randomNum = Math.ceil(Math.random() * 83);
+        // fetch(`https://swapi.dev/api/people/${randomNum}/`)
+        fetch(
+          `https://rawcdn.githack.com/akabab/starwars-api/0.2.1/api/all.json`
+        )
+          .then((response) => response.json())
+          .then((characters) => {
+            const character = characters[randomNum];
+            pro_pic.setAttribute("src", character["image"]);
+            name.innerHTML = character["name"];
+            height.innerHTML = character["height"];
+            mass.innerHTML = character["mass"];
+            gender.innerHTML = character["gender"];
+            species.innerHTML = character["species"];
+
+            console.log(characters[randomNum]);
+          });
+      });
+    </script>
+
+    <!-- bootstrap script -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
